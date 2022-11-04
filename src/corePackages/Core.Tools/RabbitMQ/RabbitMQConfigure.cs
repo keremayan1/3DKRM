@@ -10,6 +10,6 @@ namespace Core.Tools.RabbitMQ
 {
     public static class RabbitMQConfigure
     {
-        
+         
     }
 }

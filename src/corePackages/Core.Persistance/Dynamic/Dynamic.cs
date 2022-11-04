@@ -12,7 +12,7 @@ namespace Core.Persistance.Dynamic
         public Filter? Filter { get; set; }
         public Dynamic()
         {
-
+             
         }
         public Dynamic(IEnumerable<Sort>? sort, Filter? filter)
         {

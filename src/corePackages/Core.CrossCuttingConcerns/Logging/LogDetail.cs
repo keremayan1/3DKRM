@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.CrossCuttingConcerns.Logging
-{
+{ 
     public class LogDetail
     {
         public string FullName { get; set; }
