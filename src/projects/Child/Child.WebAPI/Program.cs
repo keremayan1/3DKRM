@@ -16,16 +16,7 @@ builder.Services.AddMassTransit(x =>
             host.Password("123456");
         });
         config.UseRawJsonSerializer();
-        config.ReceiveEndpoint("create-child-queue", e =>
-        {
 
-            e.Bind("Child", x =>
-            {
-                x.Durable = false;
-                x.ExchangeType = ExchangeType.Direct;
-                x.RoutingKey = "createChild";
-            });
-        });
     });
 });
 // Add services to the container.
