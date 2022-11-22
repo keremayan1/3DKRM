@@ -3,7 +3,9 @@ using Application.Features.ChildFather.Consumers;
 using Application.Features.ChildMother.Consumers;
 using Application.Features.Children.Consumers;
 using Application.Features.ChildSiblings.Consumers;
+using Application.Features.EducationStatus.Consumers;
 using Application.Features.Gender.Consumers;
+using Application.Features.Question.Consumers;
 using Application.Features.QuestionAnswer.Consumers;
 using Core.Tools.RabbitMQ.Messages.ChildParents.Mothers;
 using Core.Tools.RabbitMQ.Messages.QuestionAnswer;
@@ -38,6 +40,17 @@ builder.Services.AddMassTransit(x =>
     x.AddConsumer<UpdateChildSiblingsMessageConsumer>();
     x.AddConsumer<DeleteChildSiblingsMessageConsumer>();
 
+    x.AddConsumer<CreateEducationStatusMessageConsumer>();
+    x.AddConsumer<DeleteEducationStatusMessageConsumer>();
+    x.AddConsumer<UpdateEducationStatusMessageConsumer>();
+
+    x.AddConsumer<CreateQuestionTitleMessageConsumer>();
+    x.AddConsumer<UpdateQuestionTitleMessageConsumer>();
+    x.AddConsumer<DeleteQuestionTitleMessageConsumer>();
+
+    x.AddConsumer<CreateQuestionMessageConsumer>();
+    x.AddConsumer<UpdateQuestionMessageConsumer>();
+    x.AddConsumer<DeleteQuestionMessageConsumer>();
 
     x.UsingRabbitMq((context, config) =>
     {
@@ -119,6 +132,42 @@ builder.Services.AddMassTransit(x =>
         config.ReceiveEndpoint("update-child-siblings-queue", e =>
         {
             e.ConfigureConsumer<UpdateChildSiblingsMessageConsumer>(context);
+        });
+        config.ReceiveEndpoint("create-education-status-queue", e =>
+        {
+            e.ConfigureConsumer<CreateEducationStatusMessageConsumer>(context);
+        });
+        config.ReceiveEndpoint("update-education-status-queue", e =>
+        {
+            e.ConfigureConsumer<UpdateEducationStatusMessageConsumer>(context);
+        });
+        config.ReceiveEndpoint("delete-education-status-queue", e =>
+        {
+            e.ConfigureConsumer<DeleteEducationStatusMessageConsumer>(context);
+        });
+        config.ReceiveEndpoint("create-question-title-queue", e =>
+        {
+            e.ConfigureConsumer<CreateQuestionTitleMessageConsumer>(context);
+        });
+        config.ReceiveEndpoint("update-question-title-queue", e =>
+        {
+            e.ConfigureConsumer<UpdateQuestionTitleMessageConsumer>(context);
+        });
+        config.ReceiveEndpoint("delete-question-title-queue", e =>
+        {
+            e.ConfigureConsumer<DeleteQuestionTitleMessageConsumer>(context);
+        });
+        config.ReceiveEndpoint("create-question-queue", e =>
+        {
+            e.ConfigureConsumer<CreateQuestionMessageConsumer>(context);
+        });
+        config.ReceiveEndpoint("update-question-queue", e =>
+        {
+            e.ConfigureConsumer<UpdateQuestionMessageConsumer>(context);
+        });
+        config.ReceiveEndpoint("delete-question-queue", e =>
+        {
+            e.ConfigureConsumer<DeleteQuestionMessageConsumer>(context);
         });
     });
 });
