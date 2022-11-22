@@ -7,8 +7,11 @@ import com.krm3d.childSiblings.entities.ChildSiblings;
 import com.krm3d.childSiblings.repositories.ChildSiblingsRepository;
 import com.krm3d.childSiblings.rules.ChildSiblingsBusinessRules;
 import com.krm3d.childSiblings.services.ChildSiblingsService;
+import com.krm3d.childSiblings.services.streams.ChildSiblingsPublishChannel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -19,11 +22,13 @@ public class ChildSiblingServiceImpl implements ChildSiblingsService {
     private ChildSiblingsRepository childSiblingsRepository;
     private ChildSiblingsBusinessRules childSiblingsBusinessRules;
     private ModelMapper mapper;
+    private ChildSiblingsPublishChannel childSiblingsPublishChannel;
     @Autowired
-    public ChildSiblingServiceImpl(ChildSiblingsRepository childSiblingsRepository, ChildSiblingsBusinessRules childSiblingsBusinessRules, ModelMapper mapper) {
+    public ChildSiblingServiceImpl(ChildSiblingsRepository childSiblingsRepository, ChildSiblingsBusinessRules childSiblingsBusinessRules, ModelMapper mapper, ChildSiblingsPublishChannel childSiblingsPublishChannel) {
         this.childSiblingsRepository = childSiblingsRepository;
         this.childSiblingsBusinessRules = childSiblingsBusinessRules;
         this.mapper = mapper;
+        this.childSiblingsPublishChannel = childSiblingsPublishChannel;
     }
 
     @Override
@@ -48,6 +53,7 @@ public class ChildSiblingServiceImpl implements ChildSiblingsService {
             this.childSiblingsBusinessRules.ToUpper(childSiblings);
             this.childSiblingsBusinessRules.Trim(childSiblings);
             this.childSiblingsRepository.save(childSiblings);
+            this.childSiblingsPublishChannel.createOutputChannel().send(MessageBuilder.withPayload(childSiblings).build());
         }
         return  createdChildSiblingsDto;
     }
@@ -56,6 +62,7 @@ public class ChildSiblingServiceImpl implements ChildSiblingsService {
     public UpdatedChildSiblingsDto update(UpdatedChildSiblingsDto updatedChildSiblingsDto) {
         var mappedChildrenSiblings = this.mapper.map(updatedChildSiblingsDto, ChildSiblings.class);
         this.childSiblingsRepository.save(mappedChildrenSiblings);
+        this.childSiblingsPublishChannel.updateOutputChannel().send(MessageBuilder.withPayload(mappedChildrenSiblings).build());
         return updatedChildSiblingsDto;
     }
 
@@ -63,6 +70,7 @@ public class ChildSiblingServiceImpl implements ChildSiblingsService {
     public DeletedChildSiblingsDto delete(DeletedChildSiblingsDto deletedChildSiblingsDto) {
         var mappedId = this.childSiblingsRepository.findById(deletedChildSiblingsDto.getId()).get();
         this.childSiblingsRepository.delete(mappedId);
+        this.childSiblingsPublishChannel.deleteOutputChannel().send(MessageBuilder.withPayload(mappedId).build());
         return deletedChildSiblingsDto;
     }
 }
