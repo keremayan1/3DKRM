@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Tools.RabbitMQ.Messages
+﻿namespace Core.Tools.RabbitMQ.Messages.Child
 {
-    public class CreateChildMessage
+    public class UpdateChildMessage
     {
         public string Id { get; set; }
         public string GenderId { get; set; }

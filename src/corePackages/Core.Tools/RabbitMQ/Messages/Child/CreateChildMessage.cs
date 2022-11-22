@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Child.Application.Features.Children.Dtos
+namespace Core.Tools.RabbitMQ.Messages.Child
 {
-    public class UpdatedChildDto
+    public class CreateChildMessage
     {
         public string Id { get; set; }
         public string GenderId { get; set; }
