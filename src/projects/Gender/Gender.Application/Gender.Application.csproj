@@ -11,6 +11,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="FluentValidation" Version="10.3.6" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.6" />
+    <PackageReference Include="MassTransit" Version="8.0.6" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
   </ItemGroup>
@@ -19,6 +20,7 @@
     <ProjectReference Include="..\..\..\corePackages\Core.Application\Core.Application.csproj" />
     <ProjectReference Include="..\..\..\corePackages\Core.CrossCuttingConcerns\Core.CrossCuttingConcerns.csproj" />
     <ProjectReference Include="..\..\..\corePackages\Core.Persistance\Core.Persistance.csproj" />
+    <ProjectReference Include="..\..\..\corePackages\Core.Tools\Core.Tools.csproj" />
     <ProjectReference Include="..\Gender.Domain\Gender.Domain.csproj" />
   </ItemGroup>
 
