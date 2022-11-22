@@ -15,12 +15,14 @@
     <PackageReference Include="AutoMapper" Version="12.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.2" />
+    <PackageReference Include="MassTransit" Version="8.0.6" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\corePackages\Core.Persistance\Core.Persistance.csproj" />
+    <ProjectReference Include="..\..\..\corePackages\Core.Tools\Core.Tools.csproj" />
     <ProjectReference Include="..\ChildParents.Domain\ChildParents.Domain.csproj" />
   </ItemGroup>
 

@@ -2,6 +2,8 @@
 using ChildParents.Application.Features.Fathers.DTOs;
 using ChildParents.Application.Services.Repositories;
 using ChildParents.Domain.Entities;
+using Core.Tools.RabbitMQ.Messages.ChildParents.Fathers;
+using MassTransit;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,7 @@ namespace ChildParents.Application.Features.Fathers.Commands.CreateFathers
     public class CreateFathersCommand :IRequest<CreatedFatherDto>
     {
         public bool DoesHaveAFather { get; set; }
+        public string ChildrenId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EducationStatusId { get; set; }
@@ -23,11 +26,13 @@ namespace ChildParents.Application.Features.Fathers.Commands.CreateFathers
         {
             private readonly IFatherRepository _fatherRepository;
             private readonly IMapper _mapper;
+            private readonly IPublishEndpoint _publishEndpoint;
 
-            public CreateFathersCommandHandler(IFatherRepository fatherRepository, IMapper mapper)
+            public CreateFathersCommandHandler(IFatherRepository fatherRepository, IMapper mapper, IPublishEndpoint publishEndpoint)
             {
                 _fatherRepository = fatherRepository;
                 _mapper = mapper;
+                _publishEndpoint = publishEndpoint;
             }
 
             public async Task<CreatedFatherDto> Handle(CreateFathersCommand request, CancellationToken cancellationToken)
@@ -37,6 +42,7 @@ namespace ChildParents.Application.Features.Fathers.Commands.CreateFathers
                 {
                     await _fatherRepository.AddAsync(mappedFather);
                     var result = _mapper.Map<CreatedFatherDto>(mappedFather);
+                    await _publishEndpoint.Publish<CreateChildFatherMessage>(new CreateChildFatherMessage { Id = mappedFather.Id, ChildrenId = mappedFather.ChildrenId, EducationStatusId = mappedFather.EducationStatusId, FirstName = mappedFather.FirstName, LastName = mappedFather.LastName, Job = mappedFather.Job, TelephoneNumber = mappedFather.TelephoneNumber });
                     return result;
                 }
                 return null;

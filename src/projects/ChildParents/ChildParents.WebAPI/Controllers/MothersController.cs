@@ -25,7 +25,7 @@ namespace ChildParents.WebAPI.Controllers
             return Ok(result);
         }
         [HttpPut]
-        public async Task<IActionResult> Add([FromBody] UpdateMotherCommand updateMotherCommand)
+        public async Task<IActionResult> Update([FromBody] UpdateMotherCommand updateMotherCommand)
         {
             UpdatedMotherDto result = await Mediator.Send(updateMotherCommand);
             return Ok(result);

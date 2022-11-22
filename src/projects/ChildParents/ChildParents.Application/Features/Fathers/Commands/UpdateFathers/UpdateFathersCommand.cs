@@ -3,6 +3,8 @@ using ChildParents.Application.Features.Fathers.DTOs;
 using ChildParents.Application.Features.Mothers.DTOs;
 using ChildParents.Application.Services.Repositories;
 using ChildParents.Domain.Entities;
+using Core.Tools.RabbitMQ.Messages.ChildParents.Fathers;
+using MassTransit;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,7 @@ namespace ChildParents.Application.Features.Fathers.Commands.UpdateFathers
     {
 
         public string Id { get; set; }
+        public string ChildrenId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EducationStatusId { get; set; }
@@ -25,11 +28,14 @@ namespace ChildParents.Application.Features.Fathers.Commands.UpdateFathers
         {
             private readonly IFatherRepository _fatherRepository;
             private readonly IMapper _mapper;
+            private readonly IPublishEndpoint _publishEndpoint;
 
-            public UpdateFathersCommandHandler(IFatherRepository fatherRepository, IMapper mapper)
+
+            public UpdateFathersCommandHandler(IFatherRepository fatherRepository, IMapper mapper, IPublishEndpoint publishEndpoint)
             {
                 _fatherRepository = fatherRepository;
                 _mapper = mapper;
+                _publishEndpoint = publishEndpoint;
             }
 
             public async Task<UpdatedFatherDto> Handle(UpdateFathersCommand request, CancellationToken cancellationToken)
@@ -37,6 +43,7 @@ namespace ChildParents.Application.Features.Fathers.Commands.UpdateFathers
                 var mappedFather = _mapper.Map<Father>(request);
                 await _fatherRepository.UpdateAsync(mappedFather.Id, mappedFather);
                 var result = _mapper.Map<UpdatedFatherDto>(mappedFather);
+                await _publishEndpoint.Publish<UpdateChildFatherMessage>(mappedFather);
                 return result;
             }
         }

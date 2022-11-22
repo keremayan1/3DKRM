@@ -1,6 +1,12 @@
-﻿namespace ChildParents.Application.Features.Mothers.DTOs
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Core.Tools.RabbitMQ.Messages.ChildParents.Fathers
 {
-    public class UpdatedMotherDto
+    public class CreateChildFatherMessage
     {
         public string Id { get; set; }
         public string ChildrenId { get; set; }

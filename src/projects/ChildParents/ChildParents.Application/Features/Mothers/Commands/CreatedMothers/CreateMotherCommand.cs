@@ -11,6 +11,8 @@ namespace ChildParents.Application.Features.Mothers.Commands.CreatedMothers
     public  class CreateMotherCommand:IRequest<CreatedMotherDto>
     {
         public bool DoesHaveAMother { get; set; }
+        public string ChildrenId { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EducationStatusId { get; set; }

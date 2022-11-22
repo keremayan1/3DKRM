@@ -1,6 +1,6 @@
-﻿namespace ChildParents.Application.Features.Mothers.DTOs
+﻿namespace Core.Tools.RabbitMQ.Messages.ChildParents.Fathers
 {
-    public class UpdatedMotherDto
+    public class UpdateChildFatherMessage
     {
         public string Id { get; set; }
         public string ChildrenId { get; set; }
