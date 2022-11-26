@@ -9,10 +9,12 @@ import com.krm3d.educationStatus.service.commands.EducationStatusCommandService;
 import com.krm3d.educationStatus.service.streams.EducationStatusPublishChannel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
+@EnableBinding(EducationStatusPublishChannel.class)
 public class EducationStatusCommandServiceImpl implements EducationStatusCommandService {
     private EducationStatusRepository educationStatusRepository;
     private ModelMapper modelMapper;

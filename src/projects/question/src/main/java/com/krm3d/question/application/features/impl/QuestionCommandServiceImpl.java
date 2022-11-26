@@ -1,18 +1,23 @@
 package com.krm3d.question.application.features.impl;
 
+
 import com.krm3d.question.application.features.QuestionCommandService;
 import com.krm3d.question.application.features.dtos.CreatedQuestionDto;
 import com.krm3d.question.application.features.dtos.DeletedQuestionDto;
 import com.krm3d.question.application.features.dtos.UpdatedQuestionDto;
+
 import com.krm3d.question.application.features.streams.QuestionPublishChannel;
 import com.krm3d.question.domain.entities.Question;
+
 import com.krm3d.question.persistance.repositories.QuestionRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
+@EnableBinding(QuestionPublishChannel.class)
 public class QuestionCommandServiceImpl  implements QuestionCommandService {
     private QuestionRepository questionRepository;
     private ModelMapper modelMapper;

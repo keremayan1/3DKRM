@@ -8,22 +8,12 @@ namespace Persistance.Configurations
     {
         public void Configure(EntityTypeBuilder<Question> builder)
         {
-            builder.ToTable("Questions").HasKey(x => x.Id);
-            builder.Property(x => x.Id).HasColumnName("Id").ValueGeneratedNever();
+            builder.ToTable("Questions").HasKey(x => x._id);
+            builder.Property(x => x._id).HasColumnName("Id").ValueGeneratedNever();
             builder.Property(x => x.QuestionTitleId).HasColumnName("QuestionTitleId");
             builder.Property(x => x.QuestionName).HasColumnName("QuestionName");
             builder.HasOne(x => x.QuestionTitle);
             builder.HasMany(x => x.QuestionAnswers);
-        }
-    }
-    public class QuestionTitleConfiguration : IEntityTypeConfiguration<QuestionTitle>
-    {
-        public void Configure(EntityTypeBuilder<QuestionTitle> builder)
-        {
-            builder.ToTable("QuestionTitles").HasKey(x => x.Id);
-            builder.Property(x => x.Id).HasColumnName("Id").ValueGeneratedNever();
-            builder.Property(x => x.QuestionTitleName).HasColumnName("QuestionTitleName");
-            builder.HasMany(x => x.Questions);
         }
     }
 }

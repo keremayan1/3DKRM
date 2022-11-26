@@ -5,8 +5,8 @@ import org.springframework.data.annotation.Id;
 
 @Data
 public class UpdatedQuestionDto {
-    @Id
-    private String id;
+
+    private String get_id;
     private String questionTitleId;
     private String questionName;
 }

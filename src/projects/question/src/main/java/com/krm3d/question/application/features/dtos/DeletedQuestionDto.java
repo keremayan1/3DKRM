@@ -5,6 +5,6 @@ import org.springframework.data.annotation.Id;
 
 @Data
 public class DeletedQuestionDto {
-    @Id
-    private String id;
+
+    private String _id;
 }

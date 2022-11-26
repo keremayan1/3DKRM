@@ -4,7 +4,7 @@ namespace Domain.Entities
 {
     public class Question : Entity
     {
-        public string Id { get; set; }
+        public string _id { get; set; }
         public string QuestionTitleId { get; set; }
         public string QuestionName { get; set; }
         public QuestionTitle QuestionTitle { get; set; }
@@ -16,7 +16,7 @@ namespace Domain.Entities
 
         public Question(string id, string questionTitleId, string questionName):this()
         {
-            Id = id;
+           _id= id;
             QuestionTitleId = questionTitleId;
             QuestionName = questionName;
         }
