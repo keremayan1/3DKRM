@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class UpdatedChildSiblingsDto {
-    private String id;
+    private String get_id;
     private String childId;
     private String firstName;
     private String lastName;

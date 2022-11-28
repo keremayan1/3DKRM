@@ -10,6 +10,7 @@ import com.krm3d.childSiblings.services.ChildSiblingsService;
 import com.krm3d.childSiblings.services.streams.ChildSiblingsPublishChannel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
+@EnableBinding(ChildSiblingsPublishChannel.class)
 public class ChildSiblingServiceImpl implements ChildSiblingsService {
     private ChildSiblingsRepository childSiblingsRepository;
     private ChildSiblingsBusinessRules childSiblingsBusinessRules;
