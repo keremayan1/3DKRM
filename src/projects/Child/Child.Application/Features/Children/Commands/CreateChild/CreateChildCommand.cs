@@ -36,8 +36,8 @@ namespace Child.Application.Features.Children.Commands.CreateChild
             {
                 var mappedChild = _mapper.Map<child.Child>(request);
                
-              //  await _childBusinessRules.VerifyNationalId(mappedChild);
-              //  _childBusinessRules.CheckIfNationalIdExists(mappedChild.NationalId);
+              // await _childBusinessRules.VerifyNationalId(mappedChild);
+                //_childBusinessRules.CheckIfNationalIdExists(mappedChild.NationalId);
                 _childBusinessRules.ChildPropertiesToUpper(mappedChild);
                 _childBusinessRules.ChildPropertiesTrim(mappedChild);
 

@@ -32,7 +32,8 @@ public class EducationStatusCommandServiceImpl implements EducationStatusCommand
     public CreatedEducationStatusDto createEducationStatus(CreatedEducationStatusDto createdEducationStatusDto) {
        var educationStatus = modelMapper.map(createdEducationStatusDto,EducationStatus.class);
        this.educationStatusRepository.save(educationStatus);
-       this.educationStatusPublishChannel.createOutputChannel().send(MessageBuilder.withPayload(educationStatus).build());
+    var mp =    this.educationStatusPublishChannel.createOutputChannel().send(MessageBuilder.withPayload(educationStatus).build());
+    System.out.println(mp);
        var result = modelMapper.map(educationStatus, CreatedEducationStatusDto.class);
        return  result;
     }

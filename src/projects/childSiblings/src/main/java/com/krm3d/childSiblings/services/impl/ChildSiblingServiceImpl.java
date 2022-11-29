@@ -70,7 +70,7 @@ public class ChildSiblingServiceImpl implements ChildSiblingsService {
 
     @Override
     public DeletedChildSiblingsDto delete(DeletedChildSiblingsDto deletedChildSiblingsDto) {
-        var mappedId = this.childSiblingsRepository.findById(deletedChildSiblingsDto.getId()).get();
+        var mappedId = this.childSiblingsRepository.findById(deletedChildSiblingsDto.get_id()).get();
         this.childSiblingsRepository.delete(mappedId);
         this.childSiblingsPublishChannel.deleteOutputChannel().send(MessageBuilder.withPayload(mappedId).build());
         return deletedChildSiblingsDto;

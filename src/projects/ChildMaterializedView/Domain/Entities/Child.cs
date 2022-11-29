@@ -17,6 +17,7 @@ namespace Domain.Entities
         public DateTime DateOfBirth { get; set; }
         public string SchoolName { get; set; }
         public string ClassName { get; set; }
+        public GenderReadModel Gender { get; set; }
         public ChildFather ChildFather { get; set; }
         public ChildMother ChildMother { get; set; }
         public List<ChildSiblings> ChildSiblings { get; set; } = new List<ChildSiblings>();

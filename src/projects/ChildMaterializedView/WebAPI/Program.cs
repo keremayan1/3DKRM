@@ -123,26 +123,32 @@ builder.Services.AddMassTransit(x =>
         });
         config.ReceiveEndpoint("create-child-siblings-queue", e =>
         {
+            e.Bind("createChildSiblings");
             e.ConfigureConsumer<CreateChildSiblingsMessageConsumer>(context);
         });
         config.ReceiveEndpoint("delete-child-siblings-queue", e =>
         {
+            e.Bind("deleteChildSiblings");
             e.ConfigureConsumer<DeleteChildSiblingsMessageConsumer>(context);
         });
         config.ReceiveEndpoint("update-child-siblings-queue", e =>
         {
+            e.Bind("updateChildSiblings");
             e.ConfigureConsumer<UpdateChildSiblingsMessageConsumer>(context);
         });
         config.ReceiveEndpoint("create-education-status-queue", e =>
         {
+            e.Bind("createEducationStatus");
             e.ConfigureConsumer<CreateEducationStatusMessageConsumer>(context);
         });
         config.ReceiveEndpoint("update-education-status-queue", e =>
         {
+            e.Bind("updateEducationStatus");
             e.ConfigureConsumer<UpdateEducationStatusMessageConsumer>(context);
         });
         config.ReceiveEndpoint("delete-education-status-queue", e =>
         {
+            e.Bind("deleteEducationStatus");
             e.ConfigureConsumer<DeleteEducationStatusMessageConsumer>(context);
         });
         config.ReceiveEndpoint("create-question-title-queue", e =>

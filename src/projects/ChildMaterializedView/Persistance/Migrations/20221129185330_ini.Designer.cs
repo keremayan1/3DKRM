@@ -12,7 +12,7 @@ using Persistance.Contexts;
 namespace Persistance.Migrations
 {
     [DbContext(typeof(SQLContext))]
-    [Migration("20221112165430_ini")]
+    [Migration("20221129185330_ini")]
     partial class ini
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,7 +46,7 @@ namespace Persistance.Migrations
 
                     b.Property<string>("GenderId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("GenderId");
 
                     b.Property<string>("LastName")
@@ -66,6 +66,8 @@ namespace Persistance.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GenderId");
+
                     b.ToTable("Children", (string)null);
                 });
 
@@ -82,7 +84,7 @@ namespace Persistance.Migrations
 
                     b.Property<string>("EducationStatusId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("EducationStatusId");
 
                     b.Property<string>("FirstName")
@@ -109,6 +111,8 @@ namespace Persistance.Migrations
 
                     b.HasIndex("ChildrenId")
                         .IsUnique();
+
+                    b.HasIndex("EducationStatusId");
 
                     b.ToTable("ChildFathers", (string)null);
                 });
@@ -233,7 +237,7 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Domain.Entities.Question", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("_id")
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("Id");
 
@@ -247,7 +251,7 @@ namespace Persistance.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("QuestionTitleId");
 
-                    b.HasKey("Id");
+                    b.HasKey("_id");
 
                     b.HasIndex("QuestionTitleId");
 
@@ -304,6 +308,17 @@ namespace Persistance.Migrations
                     b.ToTable("QuestionTitles", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Child", b =>
+                {
+                    b.HasOne("Domain.Entities.GenderReadModel", "Gender")
+                        .WithMany()
+                        .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Gender");
+                });
+
             modelBuilder.Entity("Domain.Entities.ChildFather", b =>
                 {
                     b.HasOne("Domain.Entities.Child", "Child")
@@ -312,7 +327,15 @@ namespace Persistance.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.EducationStatusReadModel", "EducationStatus")
+                        .WithMany()
+                        .HasForeignKey("EducationStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Child");
+
+                    b.Navigation("EducationStatus");
                 });
 
             modelBuilder.Entity("Domain.Entities.ChildMother", b =>

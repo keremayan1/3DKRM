@@ -10,24 +10,6 @@ namespace Persistance.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Children",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    GenderId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NationalId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SchoolName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ClassName = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Children", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "EducationStatuses",
                 columns: table => new
                 {
@@ -64,6 +46,49 @@ namespace Persistance.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Children",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    GenderId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    NationalId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SchoolName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClassName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Children", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Children_Genders_GenderId",
+                        column: x => x.GenderId,
+                        principalTable: "Genders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Questions",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    QuestionTitleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    QuestionName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Questions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Questions_QuestionTitles_QuestionTitleId",
+                        column: x => x.QuestionTitleId,
+                        principalTable: "QuestionTitles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ChildFathers",
                 columns: table => new
                 {
@@ -71,7 +96,7 @@ namespace Persistance.Migrations
                     ChildrenId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EducationStatusId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EducationStatusId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Job = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TelephoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -82,6 +107,12 @@ namespace Persistance.Migrations
                         name: "FK_ChildFathers_Children_ChildrenId",
                         column: x => x.ChildrenId,
                         principalTable: "Children",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ChildFathers_EducationStatuses_EducationStatusId",
+                        column: x => x.EducationStatusId,
+                        principalTable: "EducationStatuses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -133,25 +164,6 @@ namespace Persistance.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Questions",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    QuestionTitleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    QuestionName = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Questions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Questions_QuestionTitles_QuestionTitleId",
-                        column: x => x.QuestionTitleId,
-                        principalTable: "QuestionTitles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "QuestionAnswers",
                 columns: table => new
                 {
@@ -185,10 +197,20 @@ namespace Persistance.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ChildFathers_EducationStatusId",
+                table: "ChildFathers",
+                column: "EducationStatusId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ChildMothers_ChildrenId",
                 table: "ChildMothers",
                 column: "ChildrenId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Children_GenderId",
+                table: "Children",
+                column: "GenderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChildSiblings_ChildId",
@@ -223,19 +245,19 @@ namespace Persistance.Migrations
                 name: "ChildSiblings");
 
             migrationBuilder.DropTable(
-                name: "EducationStatuses");
-
-            migrationBuilder.DropTable(
-                name: "Genders");
-
-            migrationBuilder.DropTable(
                 name: "QuestionAnswers");
+
+            migrationBuilder.DropTable(
+                name: "EducationStatuses");
 
             migrationBuilder.DropTable(
                 name: "Children");
 
             migrationBuilder.DropTable(
                 name: "Questions");
+
+            migrationBuilder.DropTable(
+                name: "Genders");
 
             migrationBuilder.DropTable(
                 name: "QuestionTitles");
