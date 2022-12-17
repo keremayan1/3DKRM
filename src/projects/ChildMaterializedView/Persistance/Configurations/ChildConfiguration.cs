@@ -22,6 +22,7 @@ namespace Persistance.Configurations
             builder.HasOne(x => x.ChildFather).WithOne(x=>x.Child).HasForeignKey<ChildFather>(x=>x.ChildrenId);
             builder.HasOne(x => x.ChildMother).WithOne(x => x.Child).HasForeignKey<ChildMother>(x => x.ChildrenId);
             builder.HasMany(x => x.ChildSiblings).WithOne(x => x.Child);
+           
         }
     }
 }

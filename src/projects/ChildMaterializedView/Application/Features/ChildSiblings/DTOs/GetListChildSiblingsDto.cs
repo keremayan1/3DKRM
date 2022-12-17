@@ -4,14 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.ChildFather.DTOs
+namespace Application.Features.ChildSiblings.DTOs
 {
-    public class GetChildFatherDto
+    public class GetListChildSiblingsDto
     {
+       
+        
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string GenderName { get; set; }
+        public int Age { get; set; }
         public string EducationStatusName { get; set; }
         public string Job { get; set; }
-        public string TelephoneNumber { get; set; }
     }
 }

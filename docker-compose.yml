@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3"
 services:
   childdb:
     image: mongo
@@ -35,6 +35,34 @@ services:
     build:
       context: .
       dockerfile: src/projects/Gender/Gender.WebAPI/Dockerfile    
+  childparents.api:
+     image: ${DOCKER_REGISTRY-}childparents.api
+     build:
+      context: .
+      dockerfile: src/projects/ChildParents/ChildParents.WebAPI/Dockerfile
+  questiontitle.api:
+    image: ${DOCKER_REGISTRY-}questiontitle.api
+    build: 
+      context: .
+      dockerfile: src/projects/QuestionTitle/QuestionTitle.WebAPI/Dockerfile
+  questionanswer.api:
+    image: ${DOCKER_REGISTRY-}questionanswer.api
+    build: 
+      context: .
+      dockerfile: src/projects/QuestionAnswer/QuestionAnswer.WebAPI/Dockerfile
+  childsiblings.api:
+    image: childsiblings.api
+    build: .
+      
+    container_name: childsiblingsapi
+    restart: always
+    environment:
+      - spring.rabbitmq.host=rabbitmq
+      - spring.data.mongodb.uri=mongodb://childsiblingsdb:27017
+    ports:
+      - 8000:8080
+    links:
+      - childsiblingsdb   
 volumes:
   childdb_volume:
   childparentsdb_volume:  

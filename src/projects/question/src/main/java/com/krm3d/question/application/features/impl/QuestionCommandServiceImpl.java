@@ -33,7 +33,7 @@ public class QuestionCommandServiceImpl  implements QuestionCommandService {
     public CreatedQuestionDto add(CreatedQuestionDto createdQuestionDto) {
         var mappedQuestion= this.modelMapper.map(createdQuestionDto, Question.class);
         this.questionRepository.save(mappedQuestion);
-        this.questionPublishChannel.createOutputChannel().send(MessageBuilder.withPayload(mappedQuestion).build());
+        System.out.println(this.questionPublishChannel.createOutputChannel().send(MessageBuilder.withPayload(mappedQuestion).build()));
         return  createdQuestionDto;
     }
 

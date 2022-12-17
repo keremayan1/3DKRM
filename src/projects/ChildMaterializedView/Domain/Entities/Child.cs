@@ -21,6 +21,7 @@ namespace Domain.Entities
         public ChildFather ChildFather { get; set; }
         public ChildMother ChildMother { get; set; }
         public List<ChildSiblings> ChildSiblings { get; set; } = new List<ChildSiblings>();
+        
         public Child()
         {
 

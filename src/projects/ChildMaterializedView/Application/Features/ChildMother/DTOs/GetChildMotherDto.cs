@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.ChildFather.DTOs
+namespace Application.Features.ChildMother.DTOs
 {
-    public class GetChildFatherDto
+    public class GetChildMotherDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

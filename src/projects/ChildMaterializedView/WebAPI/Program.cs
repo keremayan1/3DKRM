@@ -165,14 +165,17 @@ builder.Services.AddMassTransit(x =>
         });
         config.ReceiveEndpoint("create-question-queue", e =>
         {
+            e.Bind("createQuestion");
             e.ConfigureConsumer<CreateQuestionMessageConsumer>(context);
         });
         config.ReceiveEndpoint("update-question-queue", e =>
         {
+            e.Bind("updateQuestion");
             e.ConfigureConsumer<UpdateQuestionMessageConsumer>(context);
         });
         config.ReceiveEndpoint("delete-question-queue", e =>
         {
+            e.Bind("deleteQuestion");
             e.ConfigureConsumer<DeleteQuestionMessageConsumer>(context);
         });
     });

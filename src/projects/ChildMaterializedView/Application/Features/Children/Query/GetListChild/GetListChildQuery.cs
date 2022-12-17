@@ -28,10 +28,21 @@ namespace Application.Features.Children.Query.GetListChild
 
             public async Task<ChildModel> Handle(GetListChildQuery request, CancellationToken cancellationToken)
             {
-                var models = await _childRepository.GetListAsync(include: gender => gender.Include(g => g.Gender),
-                                                                 index: request.PageRequest.Page,
-                                                                 size: request.PageRequest.PageSize);
-                //var models = await _childRepository.GetListAsync2();
+                var models = await _childRepository.GetListAsync(include: x => x.Include(g => g.Gender)
+                                                                                .Include(g=>g.ChildFather)
+                                                                                .Include(g=>g.ChildFather.EducationStatus)
+                                                                                .Include(x=>x.ChildMother)
+                                                                                .Include(x=>x.ChildMother.EducationStatus)
+                                                                                .Include(x=>x.ChildSiblings)
+                                                                                .Include(x=>x.ChildSiblings.Select(x=>x.EducationStatus))
+                                                                                .Include(x=>x.ChildSiblings.Select(x=>x.Gender)),
+                                                                                
+
+                                                                                
+                                                                 
+                                                                                index: request.PageRequest.Page,
+                                                                                size: request.PageRequest.PageSize);
+               
                 var mappedModels = _mapper.Map<ChildModel>(models);
                 return mappedModels;
             }

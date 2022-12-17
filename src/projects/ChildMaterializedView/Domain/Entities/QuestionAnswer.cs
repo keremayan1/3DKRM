@@ -10,6 +10,7 @@ namespace Domain.Entities
         public string Answer { get; set; }
         public Child Child { get; set; }
         public Question Question { get; set; }
+        public QuestionTitle QuestionTitle { get; set; }
         public QuestionAnswer()
         {
 

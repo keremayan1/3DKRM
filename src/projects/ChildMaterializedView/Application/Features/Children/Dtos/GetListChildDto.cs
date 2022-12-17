@@ -1,4 +1,7 @@
 ﻿using Application.Features.ChildFather.DTOs;
+using Application.Features.ChildMother.DTOs;
+using Application.Features.ChildSiblings.DTOs;
+using Application.Features.QuestionAnswer.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +20,10 @@ namespace Application.Features.Children.Dtos
         public DateTime DateOfBirth { get; set; }
         public string SchoolName { get; set; }
         public string ClassName { get; set; }
-        public string FatherFirstName { get; set; }
         public GetChildFatherDto ChildFather { get; set; }
+        public GetChildMotherDto ChildMother { get; set; }
+        public List<GetListChildSiblingsDto> ChildSiblings { get; set; }
+        public List<GetQuestionAnswerDto> QuestionAnswers { get; set; }
 
     }
 }

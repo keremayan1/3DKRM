@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.Tools.RabbitMQ.Messages.QuestionAnswer;
+using Core.Tools.RabbitMQ.Messages.QuestionTitle;
 using QuestionTitles = Domain.Entities.QuestionTitle;
 
 
@@ -9,9 +9,9 @@ namespace Application.Features.QuestionAnswer.Profiles
     {
         public QuestionTitleMapping()
         {
-            CreateMap<QuestionTitles, CreateQuestionAnswerMessage>().ReverseMap();
-            CreateMap<QuestionTitles, DeleteQuestionAnswerMessage>().ReverseMap();
-            CreateMap<QuestionTitles, UpdateQuestionAnswerMessage>().ReverseMap();
+            CreateMap<QuestionTitles, CreateQuestionTitleMessage>().ReverseMap();
+            CreateMap<QuestionTitles, DeleteQuestionTitleMessage>().ReverseMap();
+            CreateMap<QuestionTitles, UpdateQuestionTitleMessage>().ReverseMap();
         }
     }
 }

@@ -57,6 +57,7 @@ public class ChildSiblingServiceImpl implements ChildSiblingsService {
             this.childSiblingsRepository.save(childSiblings);
             this.childSiblingsPublishChannel.createOutputChannel().send(MessageBuilder.withPayload(childSiblings).build());
         }
+        System.out.println("Islem Basarılı");
         return  createdChildSiblingsDto;
     }
 

@@ -15,10 +15,10 @@ services:
     volumes:
       - childparentsdb_volume:/data/db
   childsiblingsdb:
-    container_name: ChildSiblingsDb
+    container_name: childsiblingsdb
     restart: always
     ports:
-      - "27022:27017"
+      - 27022:27017
     volumes:
       - childsiblingsdb_volume:/data/db
   genderdb:
@@ -83,7 +83,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - RabbitMQUrl=rabbitmq
       - MongoDbConnectionSettings:ConnectionString=mongodb://childdb:27017
-   
+
     depends_on:
       - childdb
     ports:
@@ -108,7 +108,46 @@ services:
       - RabbitMQUrl=rabbitmq
       - MongoDbConnectionSettings:ConnectionString=mongodb://genderdb:27017
     depends_on:
-      - genderdb  
+      - genderdb
     ports:
-      - '5165:80'
-      - '7165:80'
+      - "5165:80"
+      - "7165:80"
+  childparents.api:
+    container_name: ChildParentsAPI
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RabbitMQUrl=rabbitmq
+      - MongoDbConnectionSettings:ConnectionString=mongodb://childparentsdb:27017
+    depends_on:
+      - childparentsdb
+    ports:
+      - "7103:80"
+      - "5103:80"
+  questiontitle.api:
+    container_name: QuestionTitleAPI
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RabbitMQUrl=rabbitmq
+      - MongoDbConnectionSettings:ConnectionString=mongodb://questiontitledb:27017
+    depends_on:
+      - questiontitledb
+    ports:
+      - "7013:80"
+      - "5013:80"
+  questionanswer.api:
+    container_name: QuestionAnswerAPI
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RabbitMQUrl=rabbitmq
+      - MongoDbConnectionSettings:ConnectionString=mongodb://questionanswerdb:27017
+    depends_on:
+      - questionanswerdb
+    ports:
+      - "7076:80"
+      - "5076:80"
+  
+      
+   

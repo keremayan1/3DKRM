@@ -17,6 +17,7 @@ namespace Persistance.Configurations
             builder.Property(x => x.Job).HasColumnName("Job");
             builder.Property(x => x.TelephoneNumber).HasColumnName("TelephoneNumber");
             builder.HasOne(x => x.Child);
+            builder.HasOne(x => x.EducationStatus);
         }
     }
 }
