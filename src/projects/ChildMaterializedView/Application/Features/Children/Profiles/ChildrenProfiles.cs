@@ -16,12 +16,14 @@ namespace Application.Features.Children.Profiles
                                                .ForMember(x=>x.ChildFather,opt=>opt.MapFrom(x=>x.ChildFather))
                                                .ForMember(x=>x.ChildMother,opt=>opt.MapFrom(x=>x.ChildMother))
                                                .ForMember(x=>x.ChildSiblings,opt=>opt.MapFrom(x=>x.ChildSiblings))
+                                               .ForMember(x=>x.QuestionAnswers,opt=>opt.MapFrom(x=>x.QuestionAnswers))
+                                               
                                                
                                                .ReverseMap();
            
 
             CreateMap<IPaginate<Child>, ChildModel>().ReverseMap();
-            CreateMap<List<Child>, ChildModel>().ReverseMap();
+            
         }
     }
 }
