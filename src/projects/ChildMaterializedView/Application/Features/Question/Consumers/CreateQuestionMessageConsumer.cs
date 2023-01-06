@@ -18,8 +18,13 @@ namespace Application.Features.Question.Consumers
 
         public async Task Consume(ConsumeContext<CreateQuestionMessage> context)
         {
-            var mappedQuestion = _mapper.Map<Questions>(context.Message);
-            await _questionRepository.AddAsync(mappedQuestion);
+            var question = new Questions
+            {
+                _id = context.Message._id,
+                QuestionTitleId = context.Message.QuestionTitleId,
+                QuestionName = context.Message.QuestionName,
+            };
+            await _questionRepository.AddAsync(question);
         }
     }
 }
