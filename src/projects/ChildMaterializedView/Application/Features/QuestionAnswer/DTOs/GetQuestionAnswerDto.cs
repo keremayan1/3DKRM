@@ -10,8 +10,9 @@ namespace Application.Features.QuestionAnswer.DTOs
 {
     public class GetQuestionAnswerDto
     {
-        public GetQuestionTitleDto QuestionTitles { get; set; }
-        public GetQuestionDto Questions { get; set; }
-        public string QuestionsAnswer { get; set; }
+        public string QuestionTitleName { get; set; }
+        public string QuestionName { get; set; }
+        public string Answer { get; set; }
+
     }
 }
