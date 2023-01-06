@@ -1,4 +1,5 @@
 ﻿using Application.Features.Children.Models;
+using Application.Features.Children.Query.GetByChildId;
 using Application.Features.Children.Query.GetListChild;
 using Core.Application.Requests;
 using Core.Shared.BaseController;
@@ -18,9 +19,9 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
         [HttpGet]
-        public async Task<IActionResult> GetAll2()
+        public async Task<IActionResult> GetById([FromQuery] string id)
         {
-            ChildModel result = await Mediator.Send(new GetListChildQuery());
+            ChildModel result = await Mediator.Send(new GetByChildIdQuery { Id=id});
             return Ok(result);
         }
     }
