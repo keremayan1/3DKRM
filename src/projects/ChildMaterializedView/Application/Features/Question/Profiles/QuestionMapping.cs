@@ -1,5 +1,6 @@
 ﻿using Application.Features.Question.DTOs;
 using AutoMapper;
+using Core.Persistance.Paging;
 using Core.Tools.RabbitMQ.Messages.Question;
 using Questions = Domain.Entities.Question;
 namespace Application.Features.Question.Profiles
@@ -12,8 +13,9 @@ namespace Application.Features.Question.Profiles
             CreateMap<Questions, UpdateQuestionMessage>().ReverseMap();
             CreateMap<Questions, DeleteQuestionMessage>().ReverseMap();
 
-            CreateMap<Questions, GetQuestionDto>().ForMember(x => x.QuestionName, opt => opt.MapFrom(x => x.QuestionName)).ReverseMap();
+           
 
+            
         }
     }
 }
