@@ -51,18 +51,21 @@ services:
       context: .
       dockerfile: src/projects/QuestionAnswer/QuestionAnswer.WebAPI/Dockerfile
   childsiblings.api:
-    image: childsiblings.api
-    build: .
-      
-    container_name: childsiblingsapi
-    restart: always
-    environment:
-      - spring.rabbitmq.host=rabbitmq
-      - spring.data.mongodb.uri=mongodb://childsiblingsdb:27017
-    ports:
-      - 8000:8080
-    links:
-      - childsiblingsdb   
+    image: ${DOCKER_REGISTRY-}childsiblings.api
+    build: 
+      context: .
+      dockerfile: src\projects\childSiblings\Dockerfile
+  educationstatus.api:
+    image: ${DOCKER_REGISTRY-}educationstatus.api
+    build: 
+      context: .
+      dockerfile: src\projects\educationStatus\Dockerfile
+  question.api:
+     image: ${DOCKER_REGISTRY-}question.api    
+     build:
+      context: .
+      dockerfile: src\projects\question\Dockerfile
+    
 volumes:
   childdb_volume:
   childparentsdb_volume:  
