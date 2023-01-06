@@ -31,11 +31,11 @@ public class ChildSiblingsControllers {
         var result =  this.childSiblingsService.update(updatedChildSiblingsDtos);
         return ResponseEntity.ok(result);
     }
-    @DeleteMapping(value = "delete/{id}")
+    @DeleteMapping(value = "delete/{childSiblingsId}")
     @ResponseBody
-    public ResponseEntity<DeletedChildSiblingsDto> delete(@PathVariable DeletedChildSiblingsDto deletedChildSiblingsDto) throws  Exception
+    public ResponseEntity<DeletedChildSiblingsDto> delete(@PathVariable String childSiblingsId) throws  Exception
     {
-        var result =  this.childSiblingsService.delete(deletedChildSiblingsDto);
+        var result =  this.childSiblingsService.delete2(childSiblingsId);
         return ResponseEntity.ok(result);
     }
 }

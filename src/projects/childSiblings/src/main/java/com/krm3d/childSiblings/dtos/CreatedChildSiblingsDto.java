@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class CreatedChildSiblingsDto {
     private String childId;
+    private String genderId;
     private String firstName;
     private String lastName;
     private int age;

@@ -71,9 +71,18 @@ public class ChildSiblingServiceImpl implements ChildSiblingsService {
 
     @Override
     public DeletedChildSiblingsDto delete(DeletedChildSiblingsDto deletedChildSiblingsDto) {
-        var mappedId = this.childSiblingsRepository.findById(deletedChildSiblingsDto.get_id()).get();
+        var mappedId = this.childSiblingsRepository.findById(deletedChildSiblingsDto.getId()).get();
         this.childSiblingsRepository.delete(mappedId);
         this.childSiblingsPublishChannel.deleteOutputChannel().send(MessageBuilder.withPayload(mappedId).build());
         return deletedChildSiblingsDto;
+    }
+
+    @Override
+    public DeletedChildSiblingsDto delete2(String childSiblingsId) {
+        var getId = this.childSiblingsRepository.findById(childSiblingsId).get();
+        this.childSiblingsRepository.delete(getId);
+        this.childSiblingsPublishChannel.deleteOutputChannel().send(MessageBuilder.withPayload(getId).build());
+        var mappedChildSiblings = this.mapper.map(getId, DeletedChildSiblingsDto.class);
+        return mappedChildSiblings;
     }
 }

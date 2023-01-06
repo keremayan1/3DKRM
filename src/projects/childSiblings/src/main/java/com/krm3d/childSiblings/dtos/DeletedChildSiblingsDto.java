@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class DeletedChildSiblingsDto {
-    private String _id;
+    private String id;
 }

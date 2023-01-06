@@ -12,5 +12,6 @@ public interface ChildSiblingsService {
     List<CreatedChildSiblingsDto> addAll2(List<CreatedChildSiblingsDto> createdChildSiblingsDto) throws Exception;
     UpdatedChildSiblingsDto update(UpdatedChildSiblingsDto updatedChildSiblingsDto);
     DeletedChildSiblingsDto delete(DeletedChildSiblingsDto deletedChildSiblingsDto);
+    DeletedChildSiblingsDto delete2(String childSiblingsId);
 
 }
