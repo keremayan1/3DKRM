@@ -11,8 +11,8 @@ namespace Domain.Entities
         public string EducationStatusId { get; set; }
         public string Job { get; set; }
         public string TelephoneNumber { get; set; }
-        public Child Child { get; set; }
-        public EducationStatusReadModel EducationStatus { get; set; }
+        public virtual Child Child { get; set; }
+        public virtual EducationStatusReadModel EducationStatus { get; set; }
 
         public ChildFather()
         {

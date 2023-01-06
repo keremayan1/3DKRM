@@ -8,9 +8,10 @@ namespace Domain.Entities
         public string QuestionId { get; set; }
         public string ChildrenId { get; set; }
         public string Answer { get; set; }
-        public Child Child { get; set; }
-        public Question Question { get; set; }
-        public QuestionTitle QuestionTitle { get; set; }
+        public virtual Child? Child { get; set; }
+        public virtual Question? Question { get; set; }
+       
+
         public QuestionAnswer()
         {
 

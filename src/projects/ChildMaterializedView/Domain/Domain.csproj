@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Entities\Child.cs~RF2fb37c.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\corePackages\Core.Persistance\Core.Persistance.csproj" />
   </ItemGroup>
 

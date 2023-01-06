@@ -17,17 +17,17 @@ namespace Domain.Entities
         public DateTime DateOfBirth { get; set; }
         public string SchoolName { get; set; }
         public string ClassName { get; set; }
-        public GenderReadModel Gender { get; set; }
-        public ChildFather ChildFather { get; set; }
-        public ChildMother ChildMother { get; set; }
-        public List<ChildSiblings> ChildSiblings { get; set; } = new List<ChildSiblings>();
-        
+        public virtual GenderReadModel? Gender { get; set; }
+        public virtual ChildFather? ChildFather { get; set; }
+        public virtual ChildMother? ChildMother { get; set; }
+        public virtual List<ChildSiblings>? ChildSiblings { get; set; }
+        public virtual List<QuestionAnswer> QuestionAnswers { get; set; }
+
         public Child()
         {
 
         }
-
-        public Child(string id, string genderId, string nationalId, string firstName, string lastName, DateTime dateOfBirth, string schoolName, string className):this()
+        public Child(string id, string genderId, string nationalId, string firstName, string lastName, DateTime dateOfBirth, string schoolName, string className):this() 
         {
             Id = id;
             GenderId = genderId;

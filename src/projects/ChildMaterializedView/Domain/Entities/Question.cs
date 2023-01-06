@@ -7,8 +7,8 @@ namespace Domain.Entities
         public string _id { get; set; }
         public string QuestionTitleId { get; set; }
         public string QuestionName { get; set; }
-        public QuestionTitle QuestionTitle { get; set; }
-        public ICollection<QuestionAnswer> QuestionAnswers { get; set; }
+        public virtual QuestionTitle QuestionTitle { get; set; }
+        public virtual ICollection<QuestionAnswer> QuestionAnswers { get; set; }
         public Question()
         {
 
