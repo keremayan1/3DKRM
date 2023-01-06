@@ -13,15 +13,15 @@ namespace WebAPI.Controllers
     public class ChildrenController : BaseController
     {
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery]PageRequest pageRequest)
+        public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
         {
-            ChildModel result = await Mediator.Send(new GetListChildQuery { PageRequest= pageRequest });
+            ChildModel result = await Mediator.Send(new GetListChildQuery { PageRequest = pageRequest });
             return Ok(result);
         }
         [HttpGet]
         public async Task<IActionResult> GetById([FromQuery] string id)
         {
-            ChildModel result = await Mediator.Send(new GetByChildIdQuery { Id=id});
+            ChildModel result = await Mediator.Send(new GetByChildIdQuery { Id = id });
             return Ok(result);
         }
     }
