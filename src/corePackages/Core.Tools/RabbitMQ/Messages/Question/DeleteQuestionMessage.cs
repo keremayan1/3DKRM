@@ -2,7 +2,7 @@
 {
     public class DeleteQuestionMessage
     {
-        public string _id { get; set; }
+        public string QuestionId { get; set; }
         public string QuestionTitleId { get; set; }
         public string QuestionName { get; set; }
     }

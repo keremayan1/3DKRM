@@ -2,7 +2,7 @@
 {
     public class DeleteChildSiblingsMessage
     {
-        public string Id { get; set; }
+        public string ChildSiblingsId { get; set; }
        
     }
 }
