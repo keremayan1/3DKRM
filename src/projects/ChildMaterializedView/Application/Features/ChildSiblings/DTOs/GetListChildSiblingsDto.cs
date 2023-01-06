@@ -8,8 +8,6 @@ namespace Application.Features.ChildSiblings.DTOs
 {
     public class GetListChildSiblingsDto
     {
-       
-        
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string GenderName { get; set; }
