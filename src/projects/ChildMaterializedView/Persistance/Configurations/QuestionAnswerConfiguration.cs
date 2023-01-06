@@ -13,8 +13,7 @@ namespace Persistance.Configurations
             builder.Property(x => x.QuestionId).HasColumnName("QuestionId");
             builder.Property(x => x.ChildrenId).HasColumnName("ChildrenId");
             builder.Property(x => x.Answer).HasColumnName("Answer");
-            builder.HasOne(x => x.Child);
-            builder.HasOne(x => x.Question);
+            builder.HasOne(x => x.Child).WithMany(x=>x.QuestionAnswers).HasForeignKey(x=>x.ChildrenId);
         }
     }
 }
